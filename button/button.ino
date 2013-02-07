@@ -9,7 +9,7 @@ void setup()
 {
   // Use designated pin as input
   // Voltage present when button pressed
-  pinMode( buttonPin, INPUT );
+  pinMode( BUTTON_PIN, INPUT );
   
   // Enable serial communication
   Serial.begin( 9600 );  
@@ -23,7 +23,7 @@ void loop()
   // Get the current state of the pin
   // Either high or low
   // Voltage present or not present
-  newState = digitalRead( buttonPin );
+  newState = digitalRead( BUTTON_PIN );
 
   // If the state has changed
   if( newState != buttonState )
