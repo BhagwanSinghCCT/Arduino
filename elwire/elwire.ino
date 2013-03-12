@@ -1,4 +1,4 @@
-int duration = 1000;
+int duration = 100;
 
 void setup() 
 {                

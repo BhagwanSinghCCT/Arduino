@@ -10,7 +10,7 @@
 #include "Wire.h"
  
 // BlinkM I2C address
-#define BLINKM_ADDR 0x09; 
+#define BLINKM_ADDR 0x09
  
 // Setup
 void setup()
@@ -52,7 +52,7 @@ void loop()
       blue = constrain( blue, 0, 255 );
 
       // Have the BlinkM fade to the new color
-      BlinkM_fadeToRGB( blinkm_addr, red, green, blue );   
+      BlinkM_fadeToRGB( BLINKM_ADDR, red, green, blue );   
     }
   }
 }

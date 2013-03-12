@@ -8,7 +8,7 @@ var WebSocketServer = require( 'websocket' ).server;
 var Http = require( 'http' );
 
 // Port name looked up in Arduino IDE
-var ARDUINO_PORT = '/dev/tty.usbmodem1d11741';
+var ARDUINO_PORT = '/dev/tty.usbmodem1d11731';
 
 // List ports
 // Arduino will display for manufacturer
