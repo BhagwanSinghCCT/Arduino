@@ -22,10 +22,10 @@ void setup()
   // Do not run start script
   // Start with LED off
   BlinkM_beginWithPower();
-  BlinkM_stopScript( 0x20 );
-  BlinkM_setRGB( 0x20, 255, 0, 0 );
-  BlinkM_setRGB( 0x21, 0, 255, 0 );
-  BlinkM_setRGB( 0x22, 0, 0, 255 );  
+  BlinkM_stopScript( BLINKM_ADDR );
+  // BlinkM_setRGB( 0x20, 255, 0, 0 );
+  // BlinkM_setRGB( 0x21, 0, 255, 0 );
+  // BlinkM_setRGB( 0x22, 0, 0, 255 );  
 }
  
 // Infinite loop 
