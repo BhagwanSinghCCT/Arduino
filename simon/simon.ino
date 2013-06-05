@@ -299,6 +299,9 @@ void setup()
   BlinkM_stopScript( 0x00 );
   BlinkM_setRGB( 0x00, 0, 0, 0  ); 
   
+  pinMode( 2, OUTPUT );
+  digitalWrite( 2, HIGH );
+  
   initialize();
   stage = 0;
 
