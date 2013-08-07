@@ -8,21 +8,7 @@ var WebSocketServer = require( 'websocket' ).server;
 var Http = require( 'http' );
 
 // Port name looked up in Arduino IDE
-var ARDUINO_PORT = '/dev/tty.usbmodem1421';
-
-// List ports
-// Arduino will display for manufacturer
-// Here for debugging purposes
-SerialPort.list( function( err, ports ) {
-	ports.forEach( function(port) {
-		console.log( port.comName )
-		console.log( port.manufacturer );
-    } );
-} );
-
-// Connect to Arduino
-// No parser needed for this example
-var serial = new SerialPort.SerialPort( ARDUINO_PORT );
+var HRMI_PORT = '/dev/tty.usbmodem1d11711';
 
 // Web Sockets start life as HTTP requests
 var server = Http.createServer( function( request, response ) {
@@ -48,13 +34,6 @@ socket.on( 'request', function( request ) {
 	clients.push( connection );
 	console.log( 'New Web Socket connection' );
 
-	// Handle incoming client messages
-	// Send messages to the Arduino	
-	connection.on( 'message', function( message ) {
-		serial.write( message.utf8Data );
-		console.log( message.utf8Data );
-	} );
-
 	// Close the connection
 	// Update client list
     connection.on( 'close', function( connection ) {
@@ -66,4 +45,31 @@ socket.on( 'request', function( request ) {
             clients.splice( index, 1 );
         }		
 	} );
+} );
+
+// List ports
+// Here for debugging purposes
+SerialPort.list( function( err, ports ) {
+	ports.forEach( function(port) {
+		console.log( port.comName )
+		console.log( port.manufacturer );
+    } );
+} );
+
+// Connect to weather board
+// Look for newline delimiter
+var serial = new SerialPort.SerialPort( HRMI_PORT, {
+	parser: SerialPort.parsers.readline( '\n' ) 	
+} );
+
+// Serial data captured from weather board
+serial.on( 'data', function( data ) {
+	// Send to console for debugging
+	console.log( data );
+
+	// Send to all connected clients
+	for( var c = 0; c < clients.length; c++ )
+	{
+		clients[c].sendUTF( data );
+	}
 } );
